@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chest_slide.wav-567eccd82317a37c096cf62c94517072.sample"
+
+[deps]
+
+source_file="res://chest/audio/chest_slide.wav"
+dest_files=[ "res://.import/chest_slide.wav-567eccd82317a37c096cf62c94517072.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
