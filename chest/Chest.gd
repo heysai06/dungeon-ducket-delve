@@ -10,6 +10,8 @@ onready var ray = $RayCast2D
 onready var anim_player = $AnimationPlayer
 onready var audio = $AudioStreamPlayer2D
 
+signal coin_awarded
+
 func _ready():
 	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
@@ -40,5 +42,6 @@ func _on_Player_bumped_chest(id,dir):
 			var coin_instance = coin.instance() # Create & Spawn Coin Instance
 			add_child(coin_instance)
 			coin_instance.position.x += 4
+			emit_signal("coin_awarded") #let the game know the player has collected a coin
 			
 			audio.play()
