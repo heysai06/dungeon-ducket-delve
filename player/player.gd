@@ -7,6 +7,8 @@ var initial_position = Vector2(0,0)
 var input_direction = Vector2(0,0)
 var is_moving = false
 var percent_moved_to_next_tile = 0.0
+var coins_collected = 0
+var chests = []
 
 onready var anim_player = $AnimationPlayer
 onready var ray = $RayCast2D
@@ -19,6 +21,12 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
 
+	chests = tree.get_nodes_in_group("Chest")
+	print(chests)
+	
+	for x in chests:
+		print(x.connect("coin_awarded", self, "increase_coin_collected_count"))
+	
 	initial_position = position
 	
 
@@ -63,5 +71,7 @@ func move(delta):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
 			
 		is_moving = false
-	
-	
+
+func increase_coin_collected_count():
+	coins_collected += 1
+	print(coins_collected)
