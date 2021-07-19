@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://level_script.gd" type="Script" id=1]
-[ext_resource path="res://tileset.png" type="Texture" id=2]
+[ext_resource path="res://Levels/level_script.gd" type="Script" id=1]
+[ext_resource path="res://Levels/tileset.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
