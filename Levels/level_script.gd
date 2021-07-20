@@ -3,6 +3,8 @@ extends TileMap
 const BASE_LINE_WIDTH = 0.0
 const DRAW_COLOR = Color.white
 
+export(int) var coin_goal = 5
+
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = Vector2.ONE * 16
 

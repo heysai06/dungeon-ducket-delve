@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/m5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=2]
+[ext_resource path="res://source_files/ddd_gui_top_bar.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -26,11 +27,16 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = 8.0
+margin_top = 4.0
 margin_right = 48.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 1, 0.92549, 0.152941, 1 )
 text = "0 / 5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 80, 4 )
+texture = ExtResource( 3 )

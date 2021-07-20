@@ -8,6 +8,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
+coin_goal = 10
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 80, 72 )
