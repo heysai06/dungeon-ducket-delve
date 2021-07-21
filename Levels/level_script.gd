@@ -4,6 +4,7 @@ const BASE_LINE_WIDTH = 0.0
 const DRAW_COLOR = Color.white
 
 export(int) var coin_goal = 5
+var player
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = Vector2.ONE * 16
@@ -23,8 +24,18 @@ onready var obstacles = get_used_cells_by_id(0)
 onready var _half_cell_size = cell_size / 2
 
 func _ready():
+	yield(get_tree(), "idle_frame")
+	var tree = get_tree()
+	
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list)
+	
+	if tree.has_group("Player"):
+		player = tree.current_scene.get_node("Player")
+		
+func _process(delta):
+	if player.coins_collected >= coin_goal:
+		get_tree().change_scene("res://LevelCompleteScreen.tscn")
 
 
 func _draw():
