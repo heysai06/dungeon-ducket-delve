@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/player.tres" type="Texture" id=1]
 [ext_resource path="res://player/player.gd" type="Script" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/AudioStreamFootstep.gd" type="Script" id=4]
+[ext_resource path="res://player/Footstep.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.05443, 4.03684 )
@@ -49,3 +51,8 @@ anims/move = SubResource( 2 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 4, 4 )
 cast_to = Vector2( 0, 4 )
+
+[node name="AudioStreamFootstep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -4.846
+script = ExtResource( 4 )
