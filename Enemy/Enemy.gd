@@ -23,7 +23,7 @@ func _ready():
 	
 	if tree.has_group("Player"):
 		player = tree.current_scene.get_node("Player")
-		player.connect("moved", self, "_on_Player_moved")
+		player.connect("turn_over", self, "_on_Player_moved")
 		_target_position = player.global_position
 
 func _on_Player_moved():

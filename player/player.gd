@@ -9,12 +9,13 @@ var is_moving = false
 var percent_moved_to_next_tile = 0.0
 var coins_collected = 0
 var chests = []
+var turns_left = 1
 
 onready var anim_player = $AnimationPlayer
 onready var ray = $RayCast2D
 
 signal bumped_chest(id,dir)
-signal moved()
+signal turn_over()
 
 
 func _ready():
@@ -62,7 +63,12 @@ func move(delta):
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
-			emit_signal("moved")
+			
+			if turns_left > 0:
+				turns_left -= 1
+			else:
+				turns_left = 1
+				emit_signal("turn_over")
 			
 		else:
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
