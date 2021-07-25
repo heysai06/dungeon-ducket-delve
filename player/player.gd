@@ -16,6 +16,7 @@ onready var ray = $RayCast2D
 
 signal bumped_chest(id,dir)
 signal turn_over()
+signal moved()
 
 
 func _ready():
@@ -63,7 +64,7 @@ func move(delta):
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
-			
+			emit_signal("moved")
 			if turns_left > 0:
 				turns_left -= 1
 			else:
