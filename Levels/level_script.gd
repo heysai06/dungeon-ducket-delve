@@ -5,6 +5,7 @@ const DRAW_COLOR = Color.white
 
 export(int) var coin_goal = 5
 var player
+var transition_layer
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = Vector2.ONE * 16
@@ -33,9 +34,15 @@ func _ready():
 	if tree.has_group("Player"):
 		player = tree.current_scene.get_node("Player")
 		
+	transition_layer = tree.current_scene.get_node("TransitionLayer")
+	transition_layer.connect("fade_out_complete", self, "switch_scenes")
+		
 func _process(delta):
 	if player.coins_collected >= coin_goal:
-		get_tree().change_scene("res://LevelCompleteScreen.tscn")
+		transition_layer.fade_out()
+		
+func switch_scenes():
+	get_tree().change_scene("res://LevelCompleteScreen.tscn")
 
 
 func _draw():
