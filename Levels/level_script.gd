@@ -42,7 +42,8 @@ func _process(delta):
 		transition_layer.fade_out()
 		
 func switch_scenes():
-	get_tree().change_scene("res://LevelCompleteScreen.tscn")
+#	get_tree().change_scene("res://LevelCompleteScreen.tscn")
+	Global.goto_scene("res://LevelCompleteScreen.tscn")
 
 
 func _draw():

@@ -14,6 +14,10 @@ config/name="Dungeon Ducat Dash"
 run/main_scene="res://main_menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Autoload/Global.gd"
+
 [display]
 
 window/size/width=160
