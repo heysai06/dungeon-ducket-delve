@@ -30,6 +30,7 @@ func _ready():
 		print(x.connect("coin_awarded", self, "increase_coin_collected_count"))
 	
 	initial_position = position
+	anim_player.play("idle")
 	
 
 func _physics_process(delta):
@@ -70,6 +71,7 @@ func move(delta):
 			else:
 				turns_left = 1
 				emit_signal("turn_over")
+				anim_player.play("idle")
 			
 		else:
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
