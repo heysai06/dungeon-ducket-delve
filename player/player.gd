@@ -83,4 +83,3 @@ func increase_coin_collected_count():
 	coins_collected += 1
 	print(coins_collected)
 
-#Practice Commit, Will remove - Daniel
