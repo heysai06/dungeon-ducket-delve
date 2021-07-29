@@ -2,15 +2,19 @@ extends KinematicBody2D
 
 const TILE_SIZE = 8
 const coin = preload("res://coin/Coin.tscn")
+const explosion = preload("res://Explosion.tscn")
 
 var player = null
 var is_moving = false
+var chest_health = 3
+var explosion_spawned = false
 
 onready var ray = $RayCast2D
 onready var anim_player = $AnimationPlayer
 onready var audio = $AudioStreamPlayer2D
 
 signal coin_awarded
+signal blocked
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -45,3 +49,19 @@ func _on_Player_bumped_chest(id,dir):
 			emit_signal("coin_awarded") #let the game know the player has collected a coin
 			
 			audio.play()
+		else:
+			chest_health -= 1
+			if chest_health > 0:
+				emit_signal("blocked")
+			else:
+				if not explosion_spawned:
+					var explosion_instance = explosion.instance() # Create & Spawn Coin Instance
+					add_child(explosion_instance)
+					explosion_instance.position.x += 4
+					explosion_instance.connect("anim_complete", self, "destory_self")
+					explosion_spawned = true
+
+				# queue_free()
+				
+func destory_self():
+	queue_free()

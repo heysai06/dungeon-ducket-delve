@@ -7,6 +7,7 @@ export(int) var coin_goal = 5
 var player
 var transition_layer
 
+
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
 export(Vector2) var map_size = Vector2.ONE * 16
 

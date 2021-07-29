@@ -27,7 +27,8 @@ func _ready():
 	print(chests)
 	
 	for x in chests:
-		print(x.connect("coin_awarded", self, "increase_coin_collected_count"))
+		x.connect("coin_awarded", self, "increase_coin_collected_count")
+		x.connect("blocked", self, "stop_moving")
 	
 	initial_position = position
 	anim_player.play("idle")
@@ -44,9 +45,9 @@ func _physics_process(delta):
 
 func process_player_input():
 	if input_direction.y == 0:
-		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+		input_direction.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
 	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+		input_direction.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up"))
 		
 	if input_direction != Vector2.ZERO:
 		initial_position = position
@@ -79,7 +80,10 @@ func move(delta):
 		if ray.get_collider().is_in_group("Chest"):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
 			
-		is_moving = false
+		# is_moving = false
+		
+func stop_moving():
+	is_moving = false
 
 func increase_coin_collected_count():
 	coins_collected += 1
