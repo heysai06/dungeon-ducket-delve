@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chest_destroy.wav-29052b1757a95908c68a60d4bed5786f.sample"
+
+[deps]
+
+source_file="res://chest/audio/chest_destroy.wav"
+dest_files=[ "res://.import/chest_destroy.wav-29052b1757a95908c68a60d4bed5786f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

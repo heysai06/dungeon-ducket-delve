@@ -43,25 +43,37 @@ func _on_Player_bumped_chest(id,dir):
 		if !ray.is_colliding():
 			position += dir * TILE_SIZE # Move Chest if not colliding
 			
-			var coin_instance = coin.instance() # Create & Spawn Coin Instance
-			add_child(coin_instance)
-			coin_instance.position.x += 4
-			emit_signal("coin_awarded") #let the game know the player has collected a coin
+			spawn_coin()
 			
 			audio.play()
 		else:
 			chest_health -= 1
+			$ChestBumpSFX.play()
 			if chest_health > 0:
 				emit_signal("blocked")
 			else:
 				if not explosion_spawned:
-					var explosion_instance = explosion.instance() # Create & Spawn Coin Instance
-					add_child(explosion_instance)
-					explosion_instance.position.x += 4
-					explosion_instance.connect("anim_complete", self, "destory_self")
-					explosion_spawned = true
-
-				# queue_free()
+					for x in 5:
+						spawn_coin()
+					create_explosion()
 				
 func destory_self():
 	queue_free()
+	
+func spawn_coin():
+	var coin_instance = coin.instance() # Create & Spawn Coin Instance
+	add_child(coin_instance)
+	coin_instance.position.x += 4
+	emit_signal("coin_awarded") #let the game know the player has collected a coin
+	
+func create_explosion():
+	var explosion_instance = explosion.instance() # Create & Spawn Coin Instance
+	add_child(explosion_instance)
+	explosion_instance.position.x += 4
+	explosion_instance.connect("anim_complete", self, "destory_self")
+	explosion_spawned = true
+	$ChestDestroyedSFX.play()
+
+
+func _on_Timer_timeout():
+	spawn_coin()
