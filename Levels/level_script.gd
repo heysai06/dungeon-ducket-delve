@@ -6,6 +6,7 @@ const DRAW_COLOR = Color.white
 export(int) var coin_goal = 5
 var player
 var transition_layer
+var level_complete = false
 
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
@@ -40,7 +41,11 @@ func _ready():
 		
 func _process(delta):
 	if player.coins_collected >= coin_goal:
-		transition_layer.fade_out()
+		if !level_complete:
+			$Timer.start(1)
+		level_complete = true
+		
+		
 		
 func switch_scenes():
 #	get_tree().change_scene("res://LevelCompleteScreen.tscn")
@@ -196,3 +201,6 @@ func _set_path_end_position(value):
 	if path_start_position != value:
 		_recalculate_path()
 
+func _on_Timer_timeout():
+	print("DONE!")
+	transition_layer.fade_out()
