@@ -42,7 +42,7 @@ func _ready():
 func _process(delta):
 	if player.coins_collected >= coin_goal:
 		if !level_complete:
-			$Timer.start(1)
+			$Timer.start(2)
 		level_complete = true
 		
 		
