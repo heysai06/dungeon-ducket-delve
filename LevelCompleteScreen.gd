@@ -8,14 +8,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if Global.level_list.size()-1 > Global.current_level:
+		Global.current_level += 1
 
 
 func _on_Timer_timeout():
-	Global.goto_scene("res://Levels/TutorialLevel_2.tscn")
-	pass # Replace with function body.
+	Global.goto_scene(Global.level_list[Global.current_level])

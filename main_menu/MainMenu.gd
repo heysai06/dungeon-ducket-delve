@@ -16,5 +16,5 @@ func _process(delta):
 
 func switch_scenes():
 #	get_tree().change_scene("res://Levels/TutorialLevel.tscn")
-	Global.goto_scene("res://Levels/TutorialLevel.tscn")
+	Global.goto_scene(Global.level_list[Global.current_level])
 	

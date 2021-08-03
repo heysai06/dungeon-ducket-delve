@@ -2,6 +2,9 @@ extends Node
 
 var current_scene = null
 var debug_mode = false
+var current_level = 0
+const level_list = ["res://Levels/TutorialLevel.tscn",
+					"res://Levels/TutorialLevel_2.tscn"]
 
 func _ready():
 	var root = get_tree().get_root()

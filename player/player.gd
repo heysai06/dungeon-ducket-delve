@@ -17,6 +17,7 @@ onready var ray = $RayCast2D
 signal bumped_chest(id,dir)
 signal turn_over()
 signal moved()
+signal hit_enemy()
 
 
 func _ready():
@@ -79,6 +80,8 @@ func move(delta):
 	else:
 		if ray.get_collider().is_in_group("Chest"):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
+		if ray.get_collider().is_in_group("Enemy"):
+			emit_signal("hit_enemy",ray.get_collider().name, input_direction)
 			
 		# is_moving = false
 		
