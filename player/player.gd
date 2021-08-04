@@ -104,3 +104,4 @@ func enemy_hit_me(dir):
 	initial_position = position
 	is_moving = true
 	turns_left += 1
+	coins_collected = 0
