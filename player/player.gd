@@ -11,6 +11,7 @@ var percent_moved_to_next_tile = 0.0
 
 var coins_collected = 0
 var chests = []
+var enemies = []
 var turns_left = 1
 
 onready var anim_player = $AnimationPlayer
@@ -27,11 +28,14 @@ func _ready():
 	var tree = get_tree()
 
 	chests = tree.get_nodes_in_group("Chest")
-	print(chests)
 	
 	for x in chests:
 		x.connect("coin_awarded", self, "increase_coin_collected_count")
 		x.connect("blocked", self, "stop_moving")
+	
+	enemies = tree.get_nodes_in_group("Enemy")
+	for x in enemies:
+		x.connect("hit_player", self, "enemy_hit_me")
 	
 	initial_position = position
 	anim_player.play("idle")
@@ -65,7 +69,7 @@ func move(delta):
 	if !ray.is_colliding(): # Check for collision before moving
 		percent_moved_to_next_tile += walk_speed * delta
 		if percent_moved_to_next_tile >= 1.0:
-			anim_player.play("move")
+			# anim_player.play("move")
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
@@ -94,3 +98,9 @@ func increase_coin_collected_count():
 	coins_collected += 1
 	print(coins_collected)
 
+func enemy_hit_me(dir):
+	$AnimationPlayer.play("hit")
+	input_direction = dir
+	initial_position = position
+	is_moving = true
+	turns_left += 1

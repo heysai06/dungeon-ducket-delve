@@ -18,6 +18,8 @@ onready var ray = $RayCast2D
 
 var player = null
 
+signal hit_player(dir)
+
 func _ready():
 	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
@@ -51,6 +53,10 @@ func _physics_process(delta):
 				#_target_point_world = _path[0]
 			else:
 				position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+		else:
+			if ray.get_collider().is_in_group("Player"):
+				emit_signal("hit_player", input_direction)
+				is_moving = false
 
 func _on_Player_moved():
 	initial_position = position
