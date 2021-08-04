@@ -5,8 +5,10 @@ const TILE_SIZE = 8
 
 var initial_position = Vector2(0,0)
 var input_direction = Vector2(0,0)
+
 var is_moving = false
 var percent_moved_to_next_tile = 0.0
+
 var coins_collected = 0
 var chests = []
 var turns_left = 1
@@ -17,7 +19,7 @@ onready var ray = $RayCast2D
 signal bumped_chest(id,dir)
 signal turn_over()
 signal moved()
-signal hit_enemy()
+signal hit_enemy(id,dir)
 
 
 func _ready():

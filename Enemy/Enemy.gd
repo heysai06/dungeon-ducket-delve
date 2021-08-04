@@ -1,20 +1,21 @@
-extends Node2D
+extends KinematicBody2D
 
-enum States { IDLE, FOLLOW }
+const TILE_SIZE = 8
 
-const MASS = 10.0
-const ARRIVE_DISTANCE = 10.0
+export var  walk_speed = 4
 
-export(float) var speed = 200.0
-var _state = null
+var initial_position = Vector2(0,0)
+var input_direction = Vector2(0,0)
+var is_moving = false
+var percent_moved_to_next_tile = 0.0
 
 var _path = []
 var _target_point_world = Vector2()
 var _target_position = Vector2()
 
 onready var timer = Timer.new()
+onready var ray = $RayCast2D
 
-var _velocity = Vector2()
 var player = null
 
 func _ready():
@@ -24,26 +25,45 @@ func _ready():
 	if tree.has_group("Player"):
 		player = tree.current_scene.get_node("Player")
 		player.connect("turn_over", self, "_on_Player_moved")
+		player.connect("hit_enemy", self, "_on_player_hit_me")
 		_target_position = player.global_position
+	
+	initial_position = position
+
+func _physics_process(delta):
+	if is_moving:
+		var desired_step: Vector2 = input_direction * TILE_SIZE / 2
+	
+		ray.cast_to = desired_step
+		ray.force_raycast_update()
+		
+		if !ray.is_colliding(): # Check for collision before moving
+			percent_moved_to_next_tile += walk_speed * delta
+			if percent_moved_to_next_tile >= 1.0:
+				position = initial_position + (TILE_SIZE * input_direction)
+				percent_moved_to_next_tile = 0.0
+				is_moving = false
+				
+				_path.remove(0)
+				if len(_path) == 0:
+					print("HIT PLAYER")
+					return
+				#_target_point_world = _path[0]
+			else:
+				position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
 
 func _on_Player_moved():
+	initial_position = position
+	
 	_get_path_to_player()
-	_move_towards_player()
-		
-func _move_towards_player() -> void:
-	var _arrived_to_next_point = _move_to(_target_point_world)
-	if _arrived_to_next_point:
-		_path.remove(0)
-		if len(_path) == 0:
-			print("HIT PLAYER")
-			return
-		_target_point_world = _path[0]
 
-func _move_to(world_position):
-	position = world_position
-	return position.distance_to(world_position) < ARRIVE_DISTANCE
+	input_direction.x = (int(_target_point_world.x) - int(position.x))
+	input_direction.y = (int(_target_point_world.y) - int(position.y))
+	input_direction = input_direction.normalized()
+	
+	is_moving = true
 
-
+# Find the path to the player
 func _get_path_to_player():
 	_target_position = player.global_position
 	_path = get_parent().get_node("TileMap").get_astar_path(position, _target_position)
@@ -51,4 +71,17 @@ func _get_path_to_player():
 		return
 	# The index 0 is the starting cell.
 	# We don't want the character to move back to it in this example.
-	_target_point_world = _path[1]
+	_target_point_world = _path[1] - Vector2(4,4)
+
+# What happens when the player hits this enemy
+func _on_player_hit_me(id,dir):
+	if id == name:
+		print("PLAYER HIT ENEMY")
+		var desired_step: Vector2 = dir * TILE_SIZE / 2
+	
+		ray.cast_to = desired_step
+		ray.force_raycast_update()
+		
+		if !ray.is_colliding():
+			position += dir * TILE_SIZE
+	pass
