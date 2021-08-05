@@ -1,0 +1,3 @@
+Condition,Importance,Content,Yes_Answer,Yes_Response,Yes_Outcome,No_Answer,No_Response,No_Outcome
+,2,How's it going?,Good,Great,,Bad,Uh oh,
+,2,What it do?,Not much,Cool,,You know,I do,
