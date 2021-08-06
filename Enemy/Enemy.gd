@@ -15,6 +15,7 @@ var _target_position = Vector2()
 
 onready var timer = Timer.new()
 onready var ray = $RayCast2D
+onready var anim_player = $AnimationPlayer
 
 var player = null
 
@@ -23,6 +24,7 @@ signal hit_player(dir)
 func _ready():
 	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
+	anim_player.play ("Idle")
 	
 	if tree.has_group("Player"):
 		player = tree.current_scene.get_node("Player")

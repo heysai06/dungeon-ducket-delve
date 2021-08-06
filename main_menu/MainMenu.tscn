@@ -6,16 +6,16 @@
 [ext_resource path="res://source_files/coin_particle.png" type="Texture" id=4]
 [ext_resource path="res://source_files/chest_particle.png" type="Texture" id=5]
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.00775194, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 2
 emission_box_extents = Vector3( 128, 1, 1 )
 flag_disable_z = true
@@ -23,9 +23,9 @@ gravity = Vector3( 0, 98, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 100, 1 )
 flag_disable_z = true
@@ -37,8 +37,7 @@ orbit_velocity_random = 0.0
 angle = 90.0
 scale = 0.1
 
-[sub_resource type="Animation" id=1]
-resource_name = "TitleBounce"
+[sub_resource type="Animation" id=6]
 length = 4.0
 loop = true
 tracks/0/type = "value"
@@ -60,19 +59,19 @@ script = ExtResource( 2 )
 [node name="TransitionLayer" parent="." instance=ExtResource( 3 )]
 
 [node name="Raining Duckets" type="Particles2D" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 80.2339, -4.30299 )
 amount = 256
 lifetime = 2.0
-process_material = SubResource( 5 )
+process_material = SubResource( 4 )
 texture = ExtResource( 4 )
 
 [node name="Bouncing Chests" type="Particles2D" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 78.818, 152.852 )
 rotation = -1.5708
 amount = 16
-process_material = SubResource( 6 )
+process_material = SubResource( 5 )
 texture = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -83,4 +82,4 @@ centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "TitleBounce"
-anims/TitleBounce = SubResource( 1 )
+anims/TitleBounce = SubResource( 6 )
