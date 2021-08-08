@@ -67,7 +67,7 @@ script = ExtResource( 1 )
 material = SubResource( 2 )
 margin_right = 160.0
 margin_bottom = 144.0
-color = Color( 1, 0.945098, 0.909804, 1 )
+color = Color( 1, 0.92549, 0.152941, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
