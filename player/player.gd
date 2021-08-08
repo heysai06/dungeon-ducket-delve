@@ -84,8 +84,8 @@ func move(delta):
 		else:
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
 			
-	elif ray.get_collider().is_in_group("Collidable") or ray.get_collider().get_node("Collidable"):
-		is_moving = false
+	#elif ray.get_collider().is_in_group("Collidable") or ray.get_collider().get_node("Collidable"):
+		#is_moving = false
 		
 	else:		
 		if ray.get_collider().is_in_group("Chest"):
