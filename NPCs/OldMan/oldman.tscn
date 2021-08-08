@@ -25,7 +25,7 @@ tracks/0/keys = {
 }
 
 [node name="OldMan" type="KinematicBody2D" groups=[
-"Player",
+"NPC",
 ]]
 script = ExtResource( 2 )
 

@@ -21,6 +21,7 @@ signal bumped_chest(id,dir)
 signal turn_over()
 signal moved()
 signal hit_enemy(id,dir)
+signal bumped_npc
 
 
 func _ready():
@@ -92,6 +93,9 @@ func move(delta):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
 		if ray.get_collider().is_in_group("Enemy"):
 			emit_signal("hit_enemy",ray.get_collider().name, input_direction)
+		if ray.get_collider().is_in_group("NPC"):
+			emit_signal("bumped_npc")
+			is_moving = false
 			
 		# is_moving = false
 		
