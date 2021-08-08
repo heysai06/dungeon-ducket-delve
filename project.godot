@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Collidable",
+"language": "GDScript",
+"path": "res://classes/Collidable.gd"
+} ]
+_global_script_class_icons={
+"Collidable": ""
+}
+
 [application]
 
 config/name="Dungeon Ducat Dash"

@@ -50,7 +50,7 @@ func _physics_process(delta):
 		is_moving = false
 
 
-func process_player_input():
+func process_player_input():	
 	if input_direction.y == 0:
 		input_direction.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
 	if input_direction.x == 0:
@@ -60,30 +60,34 @@ func process_player_input():
 		initial_position = position
 		is_moving = true
 
-func move(delta):
-	
+
+func move(delta):	
 	var desired_step: Vector2 = input_direction * TILE_SIZE / 2
 	
 	ray.cast_to = desired_step
 	ray.force_raycast_update()
-	if !ray.is_colliding(): # Check for collision before moving
+	if !ray.is_colliding(): # Check for collision before moving		
 		percent_moved_to_next_tile += walk_speed * delta
 		if percent_moved_to_next_tile >= 1.0:
 			# anim_player.play("move")
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
-			emit_signal("moved")
+			emit_signal("moved")			
 			if turns_left > 0:
 				turns_left -= 1
 			else:
 				turns_left = 1
 				emit_signal("turn_over")
-				anim_player.play("idle")
+				anim_player.play("idle")			
 			
 		else:
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
-	else:
+			
+	elif ray.get_collider().is_in_group("Collidable") or ray.get_collider().get_node("Collidable"):
+		is_moving = false
+		
+	else:		
 		if ray.get_collider().is_in_group("Chest"):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
 		if ray.get_collider().is_in_group("Enemy"):
