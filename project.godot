@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Collidable",
 "language": "GDScript",
 "path": "res://classes/Collidable.gd"
+}, {
+"base": "Camera2D",
+"class": "ShakeCamera",
+"language": "GDScript",
+"path": "res://ShakeCamera/ShakeCamera.gd"
 } ]
 _global_script_class_icons={
-"Collidable": ""
+"Collidable": "",
+"ShakeCamera": ""
 }
 
 [application]
