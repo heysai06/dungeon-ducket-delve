@@ -11,6 +11,12 @@ export (NodePath) var target
 
 func _ready():
 	randomize()
+	
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	for x in enemies:
+		x.connect("hit_player", self, "add_shake")
+	
+	$"../Player".connect("hit_enemy", self, "add_shake")
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_9):
@@ -33,5 +39,5 @@ func _shake():
 	offset.x = max_offset.x * amount * rand_range(-1, 1)
 	offset.y = max_offset.y * amount * rand_range(-1, 1)
 
-func add_shake(amount: float = 0.1):
+func add_shake(amount: float = 0.5):
 	shake = min(shake + amount, 1.0)
