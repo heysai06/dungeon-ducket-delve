@@ -10,13 +10,15 @@ export (NodePath) var target
 
 
 func _ready():
+	var tree = get_tree()
 	randomize()
 	
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for x in enemies:
 		x.connect("hit_player", self, "add_shake")
 	
-	$"../Player".connect("hit_enemy", self, "add_shake")
+	if tree.has_group("Player"):
+		$"../Player".connect("hit_enemy", self, "add_shake")
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_9):

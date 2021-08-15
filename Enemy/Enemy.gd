@@ -62,7 +62,7 @@ func _physics_process(delta):
 
 func _on_Player_moved():
 	initial_position = position
-	
+
 	_get_path_to_player()
 
 	input_direction.x = (int(_target_point_world.x) - int(position.x))
