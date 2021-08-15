@@ -53,9 +53,9 @@ func _physics_process(delta):
 
 func process_player_input():	
 	if input_direction.y == 0:
-		input_direction.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
+		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up"))
+		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 		
 	if input_direction != Vector2.ZERO:
 		initial_position = position
@@ -91,9 +91,9 @@ func move(delta):
 	else:		
 		if ray.get_collider().is_in_group("Chest"):
 			emit_signal("bumped_chest",ray.get_collider().name, input_direction)
-		if ray.get_collider().is_in_group("Enemy"):
+		elif ray.get_collider().is_in_group("Enemy"):
 			emit_signal("hit_enemy",ray.get_collider().name, input_direction)
-		if ray.get_collider().is_in_group("NPC"):
+		elif ray.get_collider().is_in_group("NPC"):
 			emit_signal("bumped_npc")
 			is_moving = false
 		else:

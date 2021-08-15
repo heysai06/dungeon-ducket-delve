@@ -10,7 +10,7 @@ var level_complete = false
 
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
-export(Vector2) var map_size = Vector2.ONE * 16
+export(Vector2) var map_size = Vector2.ONE * 64
 
 # The path start and end variables use setter methods.
 # You can find them at the bottom of the script.
@@ -64,8 +64,8 @@ func _draw():
 	var last_point = map_to_world(Vector2(point_start.x, point_start.y)) + _half_cell_size
 	for index in range(1, len(_point_path)):
 		var current_point = map_to_world(Vector2(_point_path[index].x, _point_path[index].y)) + _half_cell_size
-		draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
-		draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
+		#draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
+		#draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
 		last_point = current_point
 
 
