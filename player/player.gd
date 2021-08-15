@@ -96,8 +96,8 @@ func move(delta):
 		if ray.get_collider().is_in_group("NPC"):
 			emit_signal("bumped_npc")
 			is_moving = false
-			
-		# is_moving = false
+		else:
+			is_moving = false
 		
 func stop_moving():
 	is_moving = false
