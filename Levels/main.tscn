@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/tileset.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://coin/Ducket.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ShakeCamera/ShakeCamera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Levels/level_script.gd" type="Script" id=11]
+[ext_resource path="res://source_files/grass.png" type="Texture" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
@@ -55,6 +56,10 @@ points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
 [node name="Main" type="Node2D"]
 
 [node name="TransitionLayer" parent="." instance=ExtResource( 4 )]
+
+[node name="grass" type="Sprite" parent="."]
+position = Vector2( 80, 80 )
+texture = ExtResource( 12 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
