@@ -1,10 +1,12 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://fonts/m5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://source_files/Mx437_IBM_EGA_8x8.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://source_files/ddd_gui_top_bar.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+size = 8
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [node name="HUD" type="Control"]
@@ -19,20 +21,41 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 160.0
-margin_bottom = 16.0
+margin_bottom = 8.0
 color = Color( 0.113725, 0.168627, 0.32549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 8.0
-margin_top = 4.0
-margin_right = 48.0
-margin_bottom = 20.0
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 135.0
+margin_bottom = 9.0
+rect_scale = Vector2( 0.5, 0.75 )
 custom_fonts/normal_font = SubResource( 1 )
-custom_colors/default_color = Color( 1, 0.92549, 0.152941, 1 )
-text = "0 / 5"
+custom_colors/default_color = Color( 1, 0.639216, 0, 1 )
+bbcode_text = "29/30"
+text = "29/30"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+margin_left = 102.0
+margin_top = 2.0
+margin_right = 51.0
+margin_bottom = 9.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.5, 0.75 )
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 0.639216, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]LVL 1[/right]"
+text = "LVL 1"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

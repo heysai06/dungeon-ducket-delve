@@ -15,4 +15,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$RichTextLabel.text = String(player.coins_collected) + " / " + String(level.coin_goal)
+	$RichTextLabel.text = String(player.coins_collected) + "/" + String(level.coin_goal)
+	$RichTextLabel2.bbcode_text = "[right]LVL " + String(Global.current_level+1) + "[/right]"; 
